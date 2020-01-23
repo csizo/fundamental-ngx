@@ -401,6 +401,8 @@ import { DatePickerDisableFuncExampleComponent } from './component-docs/date-pic
 import { TimeTwoDigitsExampleComponent } from './component-docs/time/examples/time-two-digits-example/time-two-digits-example.component';
 import { PanelEdgeBleedExampleComponent } from './component-docs/panel/examples/panel-edge-bleed-example.component';
 import { TabSelectionExampleComponent } from './component-docs/tabs/examples/tab-selection-example.component';
+import { TabIconOnlyExampleComponent } from './component-docs/tabs/examples/tab-icon-only-example/tab-icon-only-example.component';
+import { TabProcessExampleComponent } from './component-docs/tabs/examples/tab-process-example/tab-process-example.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -486,6 +488,7 @@ export const declarations = [
     CalendarFormExamplesComponent,
     CalendarProgrammaticallyChangeExampleComponent,
     checkboxExampleComponents,
+    TabIconOnlyExampleComponent,
     DatePickerRangeExampleComponent,
     DatePickerSingleExampleComponent,
     DatePickerAllowNullExampleComponent,
@@ -758,7 +761,8 @@ export const declarations = [
     InputGroupStatesExampleComponent,
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
-    TimeTwoDigitsExampleComponent
+    TimeTwoDigitsExampleComponent,
+    TabProcessExampleComponent
 ]
 
 export const entryComponents = [
