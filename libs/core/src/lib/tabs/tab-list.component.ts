@@ -1,5 +1,6 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,
+    AfterContentInit,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -32,6 +33,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
         class: 'fd-tabs-custom'
     },
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TabsService]
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
@@ -71,7 +73,8 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     private _tabSelectSubscription: Subscription;
 
     constructor(
-        private tabsService: TabsService
+        private tabsService: TabsService,
+        private _changeRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -118,6 +121,7 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
                 tab.expanded = index === tabIndex;
             });
             this.selectedIndex = tabIndex;
+            this._changeRef.detectChanges();
             this.selectedIndexChange.emit(tabIndex);
         }
     }

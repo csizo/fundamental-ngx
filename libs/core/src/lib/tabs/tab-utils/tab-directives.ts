@@ -193,3 +193,14 @@ export class TabProcessIconDirective {
 })
 export class TabSeparator {
 }
+
+
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-tab-overflow]',
+    host: {
+        '[class.fd-tabs__overflow]': 'true'
+    }
+})
+export class TabsOverflow {
+}

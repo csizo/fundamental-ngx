@@ -61,6 +61,19 @@
 
         <div *ngIf="tab.header" fd-tab-separator></div>
     </ng-container>
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button fd-tab-overflow></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let tab of panelTabs.toArray(); let i = index" (click)="tabHeaderClickHandler(i)">
+                    {{tab.title}}
+                </li>
+            </ul>
+        </fd-popover-body>
+    </fd-popover>
+
 </ul>
 <ng-content select="fd-tab"></ng-content>
 <ng-content></ng-content>

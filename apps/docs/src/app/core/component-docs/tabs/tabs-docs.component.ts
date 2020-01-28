@@ -17,8 +17,6 @@ import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
-import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
-import * as complexTabHTsCode from '!raw-loader!./examples/complex-title-example/complex-title-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -141,17 +139,6 @@ export class TabsDocsComponent implements OnInit {
             fileName: 'tabs-example',
             secondFile: 'tabs-examples',
             typescriptFileCode: tabsTsCode,
-        }
-    ];
-
-    counterTab: ExampleFile[] = [
-        {
-            language: 'html',
-            component: 'ComplexTitleExampleComponent',
-            code: complexTabH,
-            fileName: 'complex-title-example',
-            secondFile: 'complex-title-example',
-            typescriptFileCode: complexTabHTsCode
         }
     ];
 
