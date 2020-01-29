@@ -204,3 +204,11 @@ export class TabSeparator {
 })
 export class TabsOverflow {
 }
+
+
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-tab-overflow-popover]',
+})
+export class TabsOverflowPopover {
+}

@@ -59,7 +59,10 @@ export class TabPanelComponent {
     @Input()
     header: boolean = false;
 
-    /** */
+    /**
+     * Semantic state of tab item it can have one of these values:
+     * 'success' | 'error' | 'warning' | 'information' | 'neutral'
+     */
     @Input()
-    tabState: TabItemState
+    tabState: TabItemState;
 }

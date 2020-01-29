@@ -1,4 +1,5 @@
 <ul class="fd-tabs"
+    #tabList
     [ngClass]="
         (compact ? 'fd-tabs--compact ' : '') + (mode ? ( 'fd-tabs--' + mode ) : '') + (' fd-tabs--' + size)
     "
@@ -61,19 +62,23 @@
 
         <div *ngIf="tab.header" fd-tab-separator></div>
     </ng-container>
-    <fd-popover>
+    <fd-popover *ngIf="fillOverflow">
         <fd-popover-control>
-            <button fd-button fd-tab-overflow></button>
+            <button fd-tab-overflow fd-button></button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul fd-list>
-                <li fd-list-item *ngFor="let tab of panelTabs.toArray(); let i = index" (click)="tabHeaderClickHandler(i)">
-                    {{tab.title}}
-                </li>
-            </ul>
+            <fd-menu>
+                <ul fd-menu-list>
+                    <li fd-menu-item tabindex="0" *ngFor="let tab of panelTabs.toArray(); let i = index"
+                        (keydown)="handleKeyDown($event, i)"
+                        (click)="tabHeaderClickHandler(i)">
+                        {{tab.title}}
+                    </li>
+                </ul>
+            </fd-menu>
         </fd-popover-body>
     </fd-popover>
-
+    <ng-content select="[fd-tab-overflow-popover]"></ng-content>
 </ul>
 <ng-content select="fd-tab"></ng-content>
 <ng-content></ng-content>

@@ -3,3 +3,7 @@
 .fd-tabs-custom {
     display: block;
 }
+
+.fd-tabs__item:last-of-type {
+    margin-right: auto;
+}

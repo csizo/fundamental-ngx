@@ -35,7 +35,10 @@ export class TabItemDirective implements CssClassBuilder, OnInit {
         this.buildComponentCssClass();
     } // user's custom classes
 
-    /** Semantic type of the tab item */
+    /**
+     * Semantic state of tab item it can have one of these values:
+     * 'success' | 'error' | 'warning' | 'information' | 'neutral'
+     */
     private _tabItemState: TabItemState;
     @Input()
     set tabItemState(tabItemState: TabItemState) {

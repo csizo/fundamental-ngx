@@ -99,6 +99,20 @@
 </component-example>
 <code-example [exampleFiles]="addingTab"></code-example>
 
+<separator></separator>
+
+<fd-docs-section-title [id]="'tabOverflow'" [componentName]="'tabs'">
+    Overflow for tabs
+</fd-docs-section-title>
+<description>
+    Overflow can be used, when there is not enough space for elements. Tabs can be automatically placed in overflow
+    popover, or it can be done by defining template.
+</description>
+<component-example [name]="'ex8'">
+    <fd-tab-overflow-example></fd-tab-overflow-example>
+</component-example>
+<code-example [exampleFiles]="tabOverflow"></code-example>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-tab-list [mode]="data.properties.items.mode" [compact]="data.properties.items.compact">
         <fd-tab [header]="data.properties.items.mode === 'filter'"

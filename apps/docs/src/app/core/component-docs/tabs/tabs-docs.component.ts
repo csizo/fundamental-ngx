@@ -14,6 +14,8 @@ import * as tabFilterTs from '!raw-loader!./examples/tab-filter-example/tab-filt
 import * as tabsTsCode from '!raw-loader!./examples/tabs-examples-component.ts';
 import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
 import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.component.scss';
+import * as tabOverflowTs from '!raw-loader!./examples/tab-overflow-example/tab-overflow-example.component.ts';
+import * as tabOverflowHtml from '!raw-loader!./examples/tab-overflow-example/tab-overflow-example.component.html';
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
@@ -198,6 +200,20 @@ export class TabsDocsComponent implements OnInit {
             code: tabAddT,
             fileName: 'adding-tab-example',
             component: 'AddingTabExampleComponent',
+        }
+    ];
+
+    tabOverflow: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabOverflowHtml,
+            fileName: 'tab-overflow-example',
+        },
+        {
+            language: 'typescript',
+            code: tabOverflowTs,
+            fileName: 'tab-overflow-example',
+            component: 'TabOverflowExampleComponent',
         }
     ];
 

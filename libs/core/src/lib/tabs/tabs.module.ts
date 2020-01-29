@@ -11,7 +11,8 @@ import {
     TabLoadTitleDirective, TabProcessDirective, TabProcessIconDirective, TabSeparator,
     TabTagDirective,
     TabTitleDirective,
-    TabsOverflow
+    TabsOverflow,
+    TabsOverflowPopover
 } from './tab-utils/tab-directives';
 import { TabNavComponent } from './tab-nav/tab-nav.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
@@ -19,6 +20,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
 import { ButtonModule } from '../button/button.module';
 import { PopoverModule } from '../popover/popover.module';
 import { ListModule } from '../list/list.module';
+import { MenuModule } from '../menu/menu.module';
 
 @NgModule({
     declarations: [
@@ -38,13 +40,15 @@ import { ListModule } from '../list/list.module';
         TabCounterHeaderDirective,
         TabProcessIconDirective,
         TabSeparator,
-        TabsOverflow
+        TabsOverflow,
+        TabsOverflowPopover
     ],
     imports: [
         CommonModule,
         ButtonModule,
         PopoverModule,
-        ListModule
+        ListModule,
+        MenuModule
     ],
     exports: [
         TabListComponent,
@@ -63,7 +67,8 @@ import { ListModule } from '../list/list.module';
         TabCounterHeaderDirective,
         TabProcessIconDirective,
         TabSeparator,
-        TabsOverflow
+        TabsOverflow,
+        TabsOverflowPopover
     ]
 })
 export class TabsModule {}

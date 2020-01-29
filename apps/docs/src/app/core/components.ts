@@ -403,6 +403,9 @@ import { PanelEdgeBleedExampleComponent } from './component-docs/panel/examples/
 import { TabSelectionExampleComponent } from './component-docs/tabs/examples/tab-selection-example.component';
 import { TabIconOnlyExampleComponent } from './component-docs/tabs/examples/tab-icon-only-example/tab-icon-only-example.component';
 import { TabProcessExampleComponent } from './component-docs/tabs/examples/tab-process-example/tab-process-example.component';
+import { TabFilterExampleComponent } from './component-docs/tabs/examples/tab-filter-example/tab-filter-example.component';
+import { TabCounterComponent } from './component-docs/tabs/examples/tab-counter/tab-counter.component';
+import { TabOverflowExampleComponent } from './component-docs/tabs/examples/tab-overflow-example/tab-overflow-example.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -762,7 +765,10 @@ export const declarations = [
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
     TimeTwoDigitsExampleComponent,
-    TabProcessExampleComponent
+    TabProcessExampleComponent,
+    TabFilterExampleComponent,
+    TabCounterComponent,
+    TabOverflowExampleComponent,
 ]
 
 export const entryComponents = [

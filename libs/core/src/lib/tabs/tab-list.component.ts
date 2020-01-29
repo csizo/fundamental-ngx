@@ -4,7 +4,7 @@ import {
     Component,
     ContentChildren,
     ElementRef,
-    EventEmitter,
+    EventEmitter, forwardRef,
     Input,
     OnChanges,
     OnDestroy,
@@ -17,6 +17,8 @@ import {
 import { TabPanelComponent } from './tab/tab-panel.component';
 import { Subscription } from 'rxjs';
 import { TabsService } from './tabs.service';
+import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import { MenuItemDirective } from '../menu/menu-item.directive';
 
 export type TabModes = 'icon-only' | 'process' | 'filter'
 
@@ -34,9 +36,11 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TabsService]
+    providers: [TabsService, MenuKeyboardService]
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
+
+    panelTabsHiddenArray: TabPanelComponent[] = [];
 
     /** @hidden */
     @ContentChildren(TabPanelComponent)
@@ -46,6 +50,18 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @ViewChildren('tabLink')
     tabLinks: QueryList<ElementRef>;
 
+    /** @hidden */
+    @ViewChildren(forwardRef(() => MenuItemDirective))
+    menuItems: QueryList<MenuItemDirective>;
+
+    // /** @hidden */
+    // @ViewChildren(TabItemDirective)
+    // tabItems: QueryList<TabItemDirective>;
+
+    // /** @hidden */
+    // @ViewChild('tabList', { static: false })
+    // tabList: ElementRef;
+
     /** Index of the selected tab panel. */
     @Input()
     selectedIndex: number = 0;
@@ -54,7 +70,7 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @Input()
     compact: boolean = false;
 
-    /** TODO */
+    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';
 
@@ -65,6 +81,12 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @Input()
     mode: TabModes;
 
+    /**
+     * Whether user wants to keep tabs on overflow popup. It can be handy, when there is too much tabs.
+     */
+    @Input()
+    fillOverflow: boolean = false;
+
     /** Event emitted when the selected panel changes. */
     @Output()
     selectedIndexChange = new EventEmitter<number>();
@@ -74,7 +96,8 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
     constructor(
         private tabsService: TabsService,
-        private _changeRef: ChangeDetectorRef
+        private _changeRef: ChangeDetectorRef,
+        private _menuService: MenuKeyboardService
     ) {}
 
     /** @hidden */
@@ -90,6 +113,12 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         });
 
         this._tabsSubscription = this.panelTabs.changes.subscribe(() => {
+            this._changeRef.detectChanges();
+            // if (this.areTwoRows()) {
+            //     this.hideLastElement();
+            // } else {
+            //     this.showFirstElement();
+            // }
             if (!this.isIndexInRange() || this.isTabContentEmpty()) {
                 this.resetTabHook();
             }
@@ -137,6 +166,42 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     tabHeaderKeyHandler(index: number, event: any): void {
         this.tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
     }
+
+    /** Overflow popup menu keyboard support */
+    public handleKeyDown(event: KeyboardEvent, index: number): void {
+        this._menuService.keyDownHandler(event, index, this.menuItems.toArray());
+    }
+
+    // private areTwoRows(): boolean {
+    //     return this.tabList.nativeElement.offsetHeight > 1.5 * this.tabItems.first.elementRef().nativeElement.offsetHeight;
+    // }
+    //
+    // private hideLastElement(): void {
+    //     const onlyShownElements: TabItemDirective[] = this.tabItems.toArray()
+    //     .filter(tab => !tab.elementRef().nativeElement.style.display.includes('none'));
+    //     const lastElement = onlyShownElements[onlyShownElements.length - 1];
+    //     lastElement.elementRef().nativeElement.style.display = 'none';
+    //     const indexOfElement: number = this.tabItems.toArray().indexOf(lastElement);
+    //     if (indexOfElement !== -1) {
+    //         this.addElementToArray(this.panelTabs.toArray()[indexOfElement]);
+    //     }
+    // }
+    //
+    // private showFirstElement(): void {
+    //     const element = this.panelTabsHiddenArray.pop();
+    //     if (element) {
+    //         const index: number = this.panelTabs.toArray().indexOf(element);
+    //         console.log(index);
+    //         if (this.tabItems.toArray()[index]) {
+    //             this.tabItems.toArray()[index].elementRef().nativeElement.style.display = '';
+    //         }
+    //     }
+    // }
+
+    // private addElementToArray(element: TabPanelComponent): void {
+    //     console.log(element);
+    //     this.panelTabsHiddenArray.push(element);
+    // }
 
     private isIndexInRange(): boolean {
         return this.panelTabs && this.panelTabs.length > 0 && this.selectedIndex < this.panelTabs.length;

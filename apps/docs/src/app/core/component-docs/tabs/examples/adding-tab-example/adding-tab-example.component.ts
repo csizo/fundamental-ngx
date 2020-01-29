@@ -13,7 +13,7 @@ export class AddingTabExampleComponent {
     ];
 
     addTab(): void {
-        if (this.tabs.length > 7) {
+        if (this.tabs.length > 30) {
             return;
         }
         this.tabs.push({
@@ -26,6 +26,6 @@ export class AddingTabExampleComponent {
         if (this.tabs.length <= 1) {
             return;
         }
-        this.tabs.pop();
+        this.tabs.shift();
     }
 }
