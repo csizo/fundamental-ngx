@@ -10,7 +10,7 @@ import {
     OnDestroy,
     Output,
     QueryList,
-    SimpleChanges,
+    SimpleChanges, ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -19,6 +19,8 @@ import { Subscription } from 'rxjs';
 import { TabsService } from './tabs.service';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { MenuItemDirective } from '../menu/menu-item.directive';
+import { TabItemDirective } from './tab-item/tab-item.directive';
+import { CarouselDirective } from '../utils/carousel/carousel.directive';
 
 export type TabModes = 'icon-only' | 'process' | 'filter'
 
@@ -40,6 +42,9 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
+    @Input()
+    enableCarousel: boolean = false;
+
     panelTabsHiddenArray: TabPanelComponent[] = [];
 
     /** @hidden */
@@ -54,9 +59,15 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @ViewChildren(forwardRef(() => MenuItemDirective))
     menuItems: QueryList<MenuItemDirective>;
 
-    // /** @hidden */
-    // @ViewChildren(TabItemDirective)
-    // tabItems: QueryList<TabItemDirective>;
+    /** @hidden */
+    @ViewChildren(TabItemDirective)
+    tabItems: QueryList<TabItemDirective>;
+
+    @ViewChild(CarouselDirective, { static: false })
+    carouselDirective: CarouselDirective;
+
+    @ViewChild('tabs', { static: false })
+    parentElement: ElementRef;
 
     // /** @hidden */
     // @ViewChild('tabList', { static: false })
@@ -170,6 +181,22 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     /** Overflow popup menu keyboard support */
     public handleKeyDown(event: KeyboardEvent, index: number): void {
         this._menuService.keyDownHandler(event, index, this.menuItems.toArray());
+    }
+
+    public get itemsElementRef(): ElementRef[] {
+        if (this.tabItems) {
+            return this.tabItems.map(item => item.elementRef());
+        } else {
+            return [];
+        }
+    }
+
+    goToNext(): void {
+        this.carouselDirective.goToNextElement();
+    }
+
+    goToPrevious(): void {
+        this.carouselDirective.goToPreviousElement();
     }
 
     // private areTwoRows(): boolean {

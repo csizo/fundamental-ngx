@@ -6,11 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./adding-tab-example.component.scss']
 })
 export class AddingTabExampleComponent {
-    tabs = [
-        {title: 'Tab 1', content: 'Content 1'},
-        {title: 'Tab 2', content: 'Content 2'},
-        {title: 'Tab 3', content: 'Content 3'},
-    ];
+    tabs = [];
+
+    constructor() {
+        for (let i  = 0; i < 30 ; i ++) {
+            this.addTab();
+        }
+    }
 
     addTab(): void {
         if (this.tabs.length > 30) {

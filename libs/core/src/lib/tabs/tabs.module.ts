@@ -21,6 +21,7 @@ import { ButtonModule } from '../button/button.module';
 import { PopoverModule } from '../popover/popover.module';
 import { ListModule } from '../list/list.module';
 import { MenuModule } from '../menu/menu.module';
+import { CarouselModule } from '../utils/carousel/carousel.module';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { MenuModule } from '../menu/menu.module';
         ButtonModule,
         PopoverModule,
         ListModule,
-        MenuModule
+        MenuModule,
+        CarouselModule
     ],
     exports: [
         TabListComponent,

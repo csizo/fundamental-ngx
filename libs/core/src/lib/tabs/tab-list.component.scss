@@ -2,8 +2,28 @@
 
 .fd-tabs-custom {
     display: block;
+    overflow: hidden;
 }
 
 .fd-tabs__item:last-of-type {
     margin-right: auto;
+}
+
+.fd-tabs {
+    flex-flow: nowrap;
+    overflow: hidden;
+    &--inner {
+        padding: 0;
+        display: flex;
+        flex-flow: nowrap;
+        margin: 0;
+    }
+
+    &__link {
+        white-space: nowrap;
+    }
+}
+
+.fd-carousel {
+    transition: 0.2s;
 }
