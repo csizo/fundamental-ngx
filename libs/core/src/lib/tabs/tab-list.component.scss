@@ -10,6 +10,7 @@
 }
 
 .fd-tabs {
+    position: relative;
     flex-flow: nowrap;
     overflow: hidden;
     &--inner {
@@ -27,3 +28,31 @@
 .fd-carousel {
     transition: 0.2s;
 }
+
+
+.fd-tabs__item {
+    display: block;
+}
+
+.fd-tabs__left-arrow,
+.fd-tabs__right-arrow {
+    position: absolute;
+    z-index: 5;
+    height: 100%;
+    width: 1.5rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0854a0;
+    cursor: pointer;
+}
+
+.fd-tabs__left-arrow {
+    left: 0;
+}
+
+.fd-tabs__right-arrow {
+    right: 0;
+}
+

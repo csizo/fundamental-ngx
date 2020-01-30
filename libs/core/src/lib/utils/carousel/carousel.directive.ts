@@ -75,15 +75,31 @@ export class CarouselDirective implements AfterContentInit, OnChanges {
         return this.elements.length - 1;
     }
 
+    private getFirstVisibleElementIndex(): number {
+        let tempWidthOfElements: number = 0;
+
+        for (let index = this.lastVisibleIndex; index > 0; index --) {
+            tempWidthOfElements = tempWidthOfElements + this.getElementWidth(this.elements[index]);
+            if (tempWidthOfElements >= this.getParentElementWidth()) {
+                return index;
+            }
+        }
+
+        return 0;
+    }
+
     private goToNextElements(count: number): void {
         if (this.willNextElementsComeToTheEnd(count)) {
             this.lastVisibleIndex = this.elements.length - 1;
+            this.firstVisibleIndex = this.getFirstVisibleElementIndex();
             this.scrollToEnd();
         } else {
+            this.scrollBy(count);
             this.firstVisibleIndex = this.firstVisibleIndex + count;
             this.lastVisibleIndex = this.getLastVisibleElementIndex();
-            this.scrollBy(count);
         }
+        console.log('first', this.firstVisibleIndex);
+        console.log('last', this.lastVisibleIndex);
     }
 
     private goToPreviousElements(count): void {
@@ -92,10 +108,12 @@ export class CarouselDirective implements AfterContentInit, OnChanges {
             this.lastVisibleIndex = this.getLastVisibleElementIndex();
             this.scrollToStart();
         } else {
+            this.scrollBackBy(count);
             this.firstVisibleIndex = this.firstVisibleIndex - count;
             this.lastVisibleIndex = this.getLastVisibleElementIndex();
-            this.scrollBackBy(count);
         }
+        console.log('first', this.firstVisibleIndex);
+        console.log('last', this.lastVisibleIndex);
     }
 
     private scrollBy(count: number): void {
@@ -103,7 +121,7 @@ export class CarouselDirective implements AfterContentInit, OnChanges {
     }
 
     private scrollBackBy(count: number): void {
-        this.refreshTransform(this.actualTranslate - this.getWidthOfNextElements(count));
+        this.refreshTransform(this.actualTranslate - this.getWidthOfPreviousElements(count));
     }
 
     private getElementWidth(elementRef: ElementRef): number {
@@ -120,6 +138,17 @@ export class CarouselDirective implements AfterContentInit, OnChanges {
         let tempWidthOfElements: number = 0;
 
         for (let index = this.lastVisibleIndex; index < this.elements.length - 1 && count > 0; index ++) {
+            tempWidthOfElements = tempWidthOfElements + this.getElementWidth(this.elements[index]);
+            count--;
+        }
+
+        return tempWidthOfElements;
+    }
+
+    private getWidthOfPreviousElements(count: number): number {
+        let tempWidthOfElements: number = 0;
+
+        for (let index = this.firstVisibleIndex; index > 0 && count > 0; index --) {
             tempWidthOfElements = tempWidthOfElements + this.getElementWidth(this.elements[index]);
             count--;
         }

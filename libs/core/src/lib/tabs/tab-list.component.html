@@ -1,6 +1,7 @@
 <div class="fd-tabs"
      #tabs
      [ngClass]="(compact ? 'fd-tabs--compact ' : '') + (mode ? ( 'fd-tabs--' + mode ) : '') + (' fd-tabs--' + size)">
+    <fd-icon *ngIf="enableCarousel" class="fd-tabs__left-arrow" (click)="goToPrevious()" [glyph]="'navigation-left-arrow'"></fd-icon>
     <ul class="fd-tabs--inner"
         fd-carousel
         [parentElement]="parentElement"
@@ -84,10 +85,7 @@
         </fd-popover>
         <ng-content select="[fd-tab-overflow-popover]"></ng-content>
     </ul>
+    <fd-icon *ngIf="enableCarousel" class="fd-tabs__right-arrow" (click)="goToNext()" [glyph]="'navigation-right-arrow'"></fd-icon>
 </div>
-<ng-container *ngIf="enableCarousel">
-    <button (click)="goToPrevious()">Previous</button>
-    <button (click)="goToNext()">Next</button>
-</ng-container>
 <ng-content select="fd-tab"></ng-content>
 <ng-content></ng-content>

@@ -19,8 +19,8 @@ export class AddingTabExampleComponent {
             return;
         }
         this.tabs.push({
-            title: 'Tab ' + (this.tabs.length + 1),
-            content: 'Content ' + (this.tabs.length + 1)
+            title: 'Tab ' + (this.tabs.length),
+            content: 'Content ' + (this.tabs.length)
         });
     }
 
